@@ -6,6 +6,7 @@
  */
 
 import { expect } from "chai";
+import { EthermineAPI } from "./ethermine-api";
 // import { functionToTest } from "./moduleToTest";
 
 describe("module to test => function to test", () => {
@@ -16,11 +17,20 @@ describe("module to test => function to test", () => {
 		const result = 5;
 		// assign result a value from functionToTest
 		expect(result).to.equal(expected);
-		// or using the should() syntax
-		result.should.equal(expected);
 	});
 	// ... more tests => it
 
 });
 
 // ... more test suites => describe
+describe("Ethermine API => Show wallet address", () => {
+	// initializing logic
+	const expected = "WALLET_ADDRESS";
+
+	it(`should return ${expected}`, () => {
+		const api = new EthermineAPI(expected);
+		const result = api.showWallet();
+		// assign result a value from functionToTest
+		expect(result).to.equal(expected);
+	});
+});

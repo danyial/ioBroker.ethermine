@@ -48,7 +48,9 @@ class Ethermine extends utils.Adapter {
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
         this.log.info("config wallet: " + this.config.wallet);
-        this.requestEthermineData();
+        if (this.config.wallet !== "") {
+            this.requestEthermineData();
+        }
     }
     /**
      * Is called when adapter shuts down - callback has to be called under any circumstances!

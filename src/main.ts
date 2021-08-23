@@ -35,7 +35,9 @@ class Ethermine extends utils.Adapter {
 		// this.config:
 		this.log.info("config wallet: " + this.config.wallet);
 
-		this.requestEthermineData();
+		if (this.config.wallet !== "") {
+			this.requestEthermineData();
+		}
 	}
 
 	/**
