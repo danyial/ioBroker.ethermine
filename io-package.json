@@ -1,0 +1,68 @@
+{
+	"common": {
+		"name": "ethermine",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung"
+			}
+		},
+		"title": "Ethermine",
+		"titleLang": {
+			"en": "Ethermine",
+			"de": "Ethermine"
+		},
+		"desc": {
+			"en": "ethermine",
+			"de": "ethermin",
+			"ru": "эфирмин",
+			"pt": "etermina",
+			"nl": "ethermijn",
+			"fr": "éthermine",
+			"it": "ethermine",
+			"es": "etermina",
+			"pl": "etermina",
+			"zh-cn": "乙醚胺"
+		},
+		"authors": [
+			"danyial <iobroker.ethermine@danny-smolinsky.de>"
+		],
+		"keywords": [
+			"ioBroker",
+			"template",
+			"Smart Home",
+			"home automation"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "build/main.js",
+		"icon": "ethermine.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/danyial/ioBroker.ethermine/master/admin/ethermine.png",
+		"readme": "https://github.com/danyial/ioBroker.ethermine/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "communication",
+		"compact": true,
+		"connectionType": "cloud",
+		"dataSource": "poll",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=2.0.0"
+			}
+		]
+	},
+	"native": {
+		"wallet": "",
+		"currentStats": true,
+		"dashboard": true,
+		"history": false,
+		"payouts": true,
+		"rounds": false,
+		"settings": false
+	},
+	"objects": [],
+	"instanceObjects": []
+}
