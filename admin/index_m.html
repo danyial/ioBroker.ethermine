@@ -19,6 +19,8 @@
 
 	<script type="text/javascript">
 		// This will be called by the admin adapter when the settings page loads
+		var wallets = [];
+
 		function load(settings, onChange) {
 			// example: select elements with id=key and class=value and insert value
 			if (!settings) return;
@@ -38,7 +40,13 @@
 						;
 				}
 			});
+
+			wallets = settings.wallets || [];
+
 			onChange(false);
+
+			values2table('wallets', wallets, onChange);
+
 			// reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
 			if (M) M.updateTextFields();
 		}
@@ -57,6 +65,8 @@
 					obj[$this.attr('id')] = $this.val();
 				}
 			});
+
+			obj.wallets = table2values('wallets');
 			callback(obj);
 		}
 	</script>
@@ -75,46 +85,65 @@
 
 		<!-- Put your content here -->
 
-		<!-- For example columns with settings: -->
-		<div class="row">
-			<div class="col s6 input-field">
-				<input type="text" class="value" id="wallet" />
-				<label for="wallet" class="translate">wallet</label>
-			</div>
+		<div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s2"><a href="#tab-wallets" class="translate active">Wallets</a></li>
+                <li class="tab col s2"><a href="#tab-settings" class="translate">Settings</a></li>
+            </ul>
+        </div>
 
-			<div class="col s6 input-field">
-				<input type="checkbox" class="value" id="currentStats" />
-				<label for="currentStats" class="translate">currentStats</label>
-			</div>
+		<div id="tab-wallets"    class="col s12 page">
+            <div class="col s12" id="wallets">
+                <a class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+				<div class="table-values-div">
+					<table class="table-values">
+						<thead>
+							<tr>
+								<th data-name="name"		style="width: 100px"	data-type="text"		class="translate">name</th>
+								<th data-name="enabled"		style="width: 70px"		data-type="checkbox"	class="translate">enabled</th>
+								<th data-name="address"		style="width: calc(100% - 290px)"		data-type="text"		class="translate">address</th>
+								<th data-buttons="delete up down" style="width: 120px"></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+            </div>
+        </div>
 
-			<div class="col s6 input-field">
-				<input type="checkbox" class="value" id="dashboard" />
-				<label for="dashboard" class="translate">dashboard</label>
-			</div>
-			
-			<div class="col s6 input-field">
-				<input type="checkbox" class="value" id="history" />
-				<label for="history" class="translate">history</label>
-			</div>
-
-			<div class="col s6 input-field">
-				<input type="checkbox" class="value" id="payouts" />
-				<label for="payouts" class="translate">payouts</label>
-			</div>
-
-			<div class="col s6 input-field">
-				<input type="checkbox" class="value" id="rounds" />
-				<label for="rounds" class="translate">rounds</label>
-			</div>
-
-			<div class="col s6 input-field">
-				<input type="checkbox" class="value" id="settings" />
-				<label for="settings" class="translate">settings</label>
-			</div>
-		</div>
-
+		<div id="tab-settings"    class="col s12 page">
+            <div class="col s12" id="settings">
+				<div class="col s6 input-field">
+					<input type="checkbox" class="value" id="currentStats" />
+					<label for="currentStats" class="translate">currentStats</label>
+				</div>
+	
+				<div class="col s6 input-field">
+					<input type="checkbox" class="value" id="dashboard" />
+					<label for="dashboard" class="translate">dashboard</label>
+				</div>
+				
+				<div class="col s6 input-field">
+					<input type="checkbox" class="value" id="history" />
+					<label for="history" class="translate">history</label>
+				</div>
+	
+				<div class="col s6 input-field">
+					<input type="checkbox" class="value" id="payouts" />
+					<label for="payouts" class="translate">payouts</label>
+				</div>
+	
+				<div class="col s6 input-field">
+					<input type="checkbox" class="value" id="rounds" />
+					<label for="rounds" class="translate">rounds</label>
+				</div>
+	
+				<div class="col s6 input-field">
+					<input type="checkbox" class="value" id="settings" />
+					<label for="settings" class="translate">settings</label>
+				</div>
+            </div>
+        </div>
 	</div>
-
 </body>
 
 </html>

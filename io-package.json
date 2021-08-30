@@ -1,8 +1,12 @@
 {
 	"common": {
 		"name": "ethermine",
-		"version": "0.0.2",
+		"version": "0.0.3",
 		"news": {
+			"0.0.3": {
+				"en": "Multiple Wallets",
+				"de": "Mehrere Wallets können konfiguriert werden"
+			},
 			"0.0.2": {
 				"en": "update logo",
 				"de": "Logo aktualisiert"

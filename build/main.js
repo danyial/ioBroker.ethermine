@@ -47,9 +47,9 @@ class Ethermine extends utils.Adapter {
         // Initialize your adapter here
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        this.log.info("config wallet: " + this.config.wallet);
-        if (this.config.wallet !== "") {
-            this.requestEthermineData();
+        this.log.info("config wallets: " + JSON.stringify(this.config.wallets));
+        if (this.config.wallets !== undefined && this.config.wallets.length > 0) {
+            this.startFetching(this.config.wallets);
         }
     }
     /**
@@ -110,35 +110,53 @@ class Ethermine extends utils.Adapter {
     // 		}
     // 	}
     // }
-    async requestEthermineData() {
-        const api = new ethermine_api_1.EthermineAPI(this.config.wallet);
-        if (this.config.currentStats === true) {
-            const currentStats = await api.currentStats();
-            this.processData(currentStats, "currentStats");
-        }
-        if (this.config.dashboard === true) {
-            const dashboard = await api.dashboard();
-            this.processData(dashboard, "dashboard");
-        }
-        if (this.config.history === true) {
-            const history = await api.history();
-            this.processData(history, "history");
-        }
-        if (this.config.payouts === true) {
-            const payouts = await api.payouts();
-            this.processData(payouts, "payouts");
-        }
-        if (this.config.rounds === true) {
-            const rounds = await api.rounds();
-            this.processData(rounds, "rounds");
-        }
-        if (this.config.settings === true) {
-            const settings = await api.settings();
-            this.processData(settings, "settings");
+    startFetching(wallets) {
+        for (const wallet of wallets) {
+            this.requestEthermineData(wallet);
         }
         setTimeout(() => {
-            this.requestEthermineData();
+            this.startFetching(wallets);
         }, 10 * 60 * 1000);
+    }
+    async requestEthermineData(wallet) {
+        if (wallet.enabled === true) {
+            this.log.info(`Fetching data for ${wallet.name}!`);
+            const api = new ethermine_api_1.EthermineAPI(wallet.address);
+            if (this.config.currentStats === true) {
+                this.log.info("Processing currentStats");
+                const currentStats = await api.currentStats();
+                this.log.info("Current Stats: " + JSON.stringify(currentStats));
+                this.processData(currentStats, wallet.name + "." + wallet.address + "." + "currentStats");
+            }
+            if (this.config.dashboard === true) {
+                this.log.info("Processing dashboard");
+                const dashboard = await api.dashboard();
+                this.processData(dashboard, wallet.name + "." + wallet.address + "." + "dashboard");
+            }
+            if (this.config.history === true) {
+                this.log.info("Processing history");
+                const history = await api.history();
+                this.processData(history, wallet.name + "." + wallet.address + "." + "history");
+            }
+            if (this.config.payouts === true) {
+                this.log.info("Processing payouts");
+                const payouts = await api.payouts();
+                this.processData(payouts, wallet.name + "." + wallet.address + "." + "payouts");
+            }
+            if (this.config.rounds === true) {
+                this.log.info("Processing rounds");
+                const rounds = await api.rounds();
+                this.processData(rounds, wallet.name + "." + wallet.address + "." + "rounds");
+            }
+            if (this.config.settings === true) {
+                this.log.info("Processing settings");
+                const settings = await api.settings();
+                this.processData(settings, wallet.name + "." + wallet.address + "." + "settings");
+            }
+        }
+        else {
+            this.log.info(`${wallet.name} is not enabled!`);
+        }
     }
     processData(data, path) {
         for (const key in data) {

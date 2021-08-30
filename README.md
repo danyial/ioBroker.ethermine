@@ -98,6 +98,9 @@ For later updates, the above procedure is not necessary. Just do the following:
 
 ## Changelog
 
+### 0.0.3
+* (danyial) multiple wallets
+
 ### 0.0.2
 * (danyial) update logo
 

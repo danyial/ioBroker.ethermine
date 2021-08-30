@@ -4,7 +4,7 @@
 declare global {
 	namespace ioBroker {
 		interface AdapterConfig {
-			wallet: string;
+			wallets: [ioBroker.Wallet];
 			currentStats: boolean;
 			dashboard: boolean;
 			history: boolean;
