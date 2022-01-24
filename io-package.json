@@ -38,9 +38,7 @@
 		],
 		"keywords": [
 			"ioBroker",
-			"template",
-			"Smart Home",
-			"home automation"
+			"crypto"
 		],
 		"license": "MIT",
 		"platform": "Javascript/Node.js",
